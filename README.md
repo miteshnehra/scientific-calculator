@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # 🔬 Scientific Calculator — Python Flask
 
 A full-stack scientific calculator with a dark, minimal UI built with Python Flask.
@@ -105,3 +106,6 @@ scientific-calculator/
 2. `calc.js` sends a POST request to Flask with the operation + numbers
 3. `app.py` uses Python's `math` module to compute the result
 4. The result is sent back as JSON and shown on the display
+=======
+# scientific-calculator
+>>>>>>> f253ccfbac20d369b61f4dfa4dc4db509444cfdf

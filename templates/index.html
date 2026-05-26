@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Scientific Calculator</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Syne:wght@400;700;800&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+<div class="calc-shell">
+
+  <!-- Display -->
+  <div class="display-area">
+    <div class="mode-row">
+      <button class="mode-btn active" id="modeDeg" onclick="setAngle('deg')">DEG</button>
+      <button class="mode-btn" id="modeRad" onclick="setAngle('rad')">RAD</button>
+      <button class="mode-btn" id="modeGrad" onclick="setAngle('grad')">GRAD</button>
+      <span class="mem-indicator" id="memIndicator" style="display:none">M</span>
+    </div>
+    <div class="expr-line" id="expr"></div>
+    <div class="main-display" id="disp">0</div>
+    <div class="unit-row" id="unitRow" style="display:none">
+      <span class="unit-label" id="unitA">—</span>
+      <span class="unit-arrow">→</span>
+      <span class="unit-label active-unit" id="unitB">—</span>
+    </div>
+  </div>
+
+  <!-- History -->
+  <div class="history-strip" id="histStrip">
+    <div class="hist-empty">no history yet</div>
+  </div>
+  <div class="sep"></div>
+
+  <!-- Buttons -->
+  <div class="buttons-area">
+
+    <!-- Scientific Row 1 -->
+    <div class="row r5">
+      <button class="btn fn" onclick="applyFn('sin')">sin</button>
+      <button class="btn fn" onclick="applyFn('cos')">cos</button>
+      <button class="btn fn" onclick="applyFn('tan')">tan</button>
+      <button class="btn fn" onclick="applyFn('asin')">sin⁻¹</button>
+      <button class="btn fn" onclick="applyFn('acos')">cos⁻¹</button>
+    </div>
+
+    <!-- Scientific Row 2 -->
+    <div class="row r5">
+      <button class="btn fn" onclick="applyFn('atan')">tan⁻¹</button>
+      <button class="btn fn" onclick="applyFn('log')">log</button>
+      <button class="btn fn" onclick="applyFn('ln')">ln</button>
+      <button class="btn fn" onclick="applyFn('sqrt')">√</button>
+      <button class="btn fn" onclick="applyFn('cbrt')">∛</button>
+    </div>
+
+    <!-- Scientific Row 3 -->
+    <div class="row r5">
+      <button class="btn fn" onclick="applyFn('square')">x²</button>
+      <button class="btn fn" onclick="applyFn('cube')">x³</button>
+      <button class="btn op" onclick="inputOp('power')">xʸ</button>
+      <button class="btn fn" onclick="applyFn('reciprocal')">1/x</button>
+      <button class="btn fn" onclick="applyFn('abs')">|x|</button>
+    </div>
+
+    <!-- Scientific Row 4 -->
+    <div class="row r5">
+      <button class="btn const" onclick="inputConst('pi')">π</button>
+      <button class="btn const" onclick="inputConst('e')">e</button>
+      <button class="btn fn" onclick="applyFn('factorial')">n!</button>
+      <button class="btn mem" onclick="memStore()">MS</button>
+      <button class="btn mem" onclick="memRecall()">MR</button>
+    </div>
+
+    <div class="sep" style="margin:0"></div>
+
+    <!-- Basic Row 1 -->
+    <div class="row r4">
+      <button class="btn clear" onclick="allClear()">AC</button>
+      <button class="btn clear" onclick="delLast()">⌫</button>
+      <button class="btn fn" onclick="toggleSign()">±</button>
+      <button class="btn op" onclick="inputOp('divide')">÷</button>
+    </div>
+
+    <!-- Numpad -->
+    <div class="row r4">
+      <button class="btn num" onclick="inputNum('7')">7</button>
+      <button class="btn num" onclick="inputNum('8')">8</button>
+      <button class="btn num" onclick="inputNum('9')">9</button>
+      <button class="btn op" onclick="inputOp('multiply')">×</button>
+    </div>
+    <div class="row r4">
+      <button class="btn num" onclick="inputNum('4')">4</button>
+      <button class="btn num" onclick="inputNum('5')">5</button>
+      <button class="btn num" onclick="inputNum('6')">6</button>
+      <button class="btn op" onclick="inputOp('subtract')">−</button>
+    </div>
+    <div class="row r4">
+      <button class="btn num" onclick="inputNum('1')">1</button>
+      <button class="btn num" onclick="inputNum('2')">2</button>
+      <button class="btn num" onclick="inputNum('3')">3</button>
+      <button class="btn op" onclick="inputOp('add')">+</button>
+    </div>
+    <div class="row r4">
+      <button class="btn num zero" onclick="inputNum('0')">0</button>
+      <button class="btn num" onclick="inputDot()">.</button>
+      <button class="btn eq" onclick="evaluate()">=</button>
+    </div>
+
+    <div class="sep" style="margin:0"></div>
+
+    <!-- Conversion Row -->
+    <div class="row r4">
+      <button class="btn conv" onclick="convertUnit('deg_to_rad')">deg→rad</button>
+      <button class="btn conv" onclick="convertUnit('rad_to_deg')">rad→deg</button>
+      <button class="btn conv" onclick="convertUnit('deg_to_grad')">deg→grad</button>
+      <button class="btn conv" onclick="convertUnit('grad_to_deg')">grad→deg</button>
+    </div>
+
+    <!-- Memory Row -->
+    <div class="row r4">
+      <button class="btn mem" onclick="memAdd()">M+</button>
+      <button class="btn mem" onclick="memSub()">M−</button>
+      <button class="btn mem" onclick="memClear()">MC</button>
+      <button class="btn mem" onclick="memView()">M?</button>
+    </div>
+
+  </div>
+</div>
+
+<script src="{{ url_for('static', filename='js/calc.js') }}"></script>
+</body>
+</html>
